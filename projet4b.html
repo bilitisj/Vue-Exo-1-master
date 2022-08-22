@@ -30,18 +30,17 @@
             </div>
             <script src="https://unpkg.com/vue@next"></script>
             <script >
+                const { ref } = Vue
                 const app = Vue.createApp({
-                    //option APi
-                    name: "App",
-                    data() { 
-                        return {
-                            affiche: false
+                    //composition API
+                    setup() { 
+                        //data
+                        let affiche = ref(false)
+                        //methods
+                        const switchp = () => {
+                            affiche.value = !affiche.value
                         }
-                    },
-                    methods: {
-                        switchp() {
-                           this.affiche = !this.affiche
-                        }
+                        return {affiche, switchp}
                     }
                 })
                 const vm = app.mount('#app')
