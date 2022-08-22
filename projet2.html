@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Première App Vue</title>
+        <style>
+            [v-cloak] {
+                display: none;
+            } /* v-cloak permet de laisser au serveur le temps de charger le script, 
+            cela permet de ne pas voir les doubles accolades lors du chargement de la page*/
+        </style>
+    </head>
+    <body>
+        <div id="app" v-cloak>
+            <section>
+                <p>Date en français {{ dateFr }}</p>
+                <p>Date en Américain {{ dateUs }}</p>
+            </section>
+            <button @click="updateDate">Reset date</button>
+        </div>
+        <script src="https://unpkg.com/vue@next"></script> 
+        
+        <script>
+            const app = Vue.createApp({ 
+                name: "App",
+                data() {
+                    return {
+                        d: new Date()
+                    }
+                },
+                computed: {
+                    dateFr() {
+                        return this.d.toLocaleTimeString('fr-FR')
+                    },
+                    dateUs() {
+                        return this.d.toLocaleTimeString('en-US')
+                    }
+                },
+                methods: {
+                    updateDate() {
+                        this.d = new Date()
+                    }
+                }
+            }) // crée l'application
+            app.mount('#app') // affiche le résultat d'application dans la div #app -> data binding
+        </script>
+    <body>
+</html>

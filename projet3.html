@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Exercice-image</title>
+        <style>
+            [v-cloak] {
+                display: none;
+            } 
+        </style>
+    </head>
+    <body>
+        <div id="app" v-cloak>
+            <img :id="idSection">
+                <h1>{{ titre }}</h1> 
+                <img @click="changeImg" v-bind:src="imageActive">
+                <p>{{ texteBrut }}</p>
+                <p v-html="texteHtml"></p>
+            </section>
+        </div>
+        <script src="https://unpkg.com/vue@next"></script> 
+        
+        <script>
+            const app = Vue.createApp({ 
+                name: "App",
+                data() {
+                    return {
+                        titre: "Les images",
+                        imageA:"https://picsum.photos/id/238/200/300",
+                        imageB:"https://picsum.photos/id/237/200/300",
+                        imageActive:"",
+                        texteBrut:"Vue c'est trop bien mais pas facile!",
+                        texteHtml:"<strong>Vue</strong> c'est difficile"
+                    }
+                },
+                created() {
+                    this.imageActive = this.imageA
+                },
+                methods: {
+                    changeImg() {
+                        this.imageActive = (this.imageActive == this.imageA) ? this.imageB : this.imageA
+                    }
+                }
+            })
+            const vm = app.mount('#app')
+
+            setTimeout(() => {
+                vm.texteBrut = "Nouveau texte"
+            },5000)
+        </script>
+    <body>
+</html>
