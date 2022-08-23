@@ -10,24 +10,43 @@
             <Alerte></Alerte>
             <Alerte></Alerte>
             <hr>
-            <compteur start="0"></compteur> 
-            <compteur start="10"></compteur> 
-            <compteur start="20"></compteur> 
-            
+            <compteur start="0" step="1" :colortext="colorBtn"></compteur> 
+            <compteur start="10" step="10"></compteur> 
+            <compteur start="20" step="20"></compteur> 
+            <compteur></compteur> 
+            <hr>
+            <a href="#" @click.prevent="colorBtn='green'">Change color</a>
         </div>
         <script src="https://unpkg.com/vue@next"></script>
         <script>
             const { ref} = Vue
 
             const compteur = {
-                props: ['start'],
+                //props: ['start', 'step'], --> soit un array
+                props: {                 // --> soit des objets
+                    start: {
+                        type: String,
+                        default: '0',
+                        required: false
+                    },
+                    step: {
+                        type: String,
+                        default: '1',
+                        required: false
+                    },
+                    colortext: {
+                        type: String,
+                        default: "black"
+                    }
+                },
+
                 name: "compteur",
-                template:`<button class="compteur" @click="increment"> Cliquez {{ compteur }} fois</button>
+                template:`<button :style="{color:colortext}" class="compteur" @click="increment"> Cliquez {{ compteur }} fois</button>
                 `,
                 setup(props) {
-                    let compteur = ref(props.start)
+                    let compteur = ref(parseInt(props.start))
                     const increment = () => {
-                        compteur.value ++
+                        compteur.value += parseInt(props.step)
                     }
                     return { compteur, increment}
                 }
@@ -36,7 +55,7 @@
             const alerte = {
                 name: "alerte",
                 template: `
-                    <div class="alerte">{{ texte }} <a href="#"@click="changeText">Change texte</a> </div>
+                    <div class="alerte">{{ texte }} <a href="#" @click="changeText">Change texte</a> </div>
                     `,
                 setup() {
                     let texte = ref(`C'est pas juste`)
@@ -53,7 +72,8 @@
                     compteur: compteur 
                 },
                 setup() {
-
+                    let colorBtn = ref('red')
+                    return {colorBtn}
                 }
             })
             const vm = App.mount("#app")
