@@ -25,7 +25,8 @@ $color: hsla(160, 100%, 37%, 1);
 .compteur {
     background: $color;
     border: none;
-    padding: .5rem;
-    border-radius: .5rem;
+    padding: .8rem;
+    margin: 1rem;
+    border-radius: 1rem;
 }
 </style>

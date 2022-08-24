@@ -44,7 +44,7 @@
 
     <script src="https://unpkg.com/vue@next"></script>
     <script>
-        const { ref } = Vue
+        const { ref, computed } = Vue
 
         //components
 
@@ -61,14 +61,17 @@
                 const switchHeart = () => {
                         context.emit('switchheart', props.oneperson.key)
                     }
-                return {switchHeart}
+                let textAlt = computed(() => {
+                    return 'Photo de ' + props.oneperson.firstName
+                })
+                return {switchHeart, textAlt}
             },
             //template du composant
             template : `
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img :src="oneperson.urlImg" alt="Placeholder image">
+                        <img :src="oneperson.urlImg" :alt="textAlt">
                     </figure>
                 </div>
                 <div class="card-content">
