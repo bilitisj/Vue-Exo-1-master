@@ -10,13 +10,16 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="wrapper">
 
 
-      <nav>
+      <nav> <!-- Navigation par defaut-->
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/contact">Contact</RouterLink>
+        <RouterLink to="/produits">Produits</RouterLink>
       </nav>
     </div>
   </header>
-
+  
+<!-- Composants qui sont liés à nos routes-->
   <RouterView />
 </template>
 

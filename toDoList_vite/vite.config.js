@@ -10,5 +10,6 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  base: '' //si app dans un sous-dossier en production
 })

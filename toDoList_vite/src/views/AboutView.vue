@@ -1,14 +1,24 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <AddTask></AddTask>
-    <TasksList></TasksList>
+    <h1>About</h1>
+      <Alerte :msg="msg" :afficheTxt="affiche" @clicked="updateState"></Alerte>
   </div>
 </template>
 
 <script setup>
+import Alerte from "@/components/Alerte.vue"
+import {ref} from 'vue'
+import router from "@/router/index.js";
 
+const affiche = ref(true)
 
+const msg = ref('texte de base')
+
+const updateState = (value) => {
+  affiche.value = !affiche.value
+  msg.value = value
+  router.push({name:'contact'})
+}
 </script>
 
 <style>

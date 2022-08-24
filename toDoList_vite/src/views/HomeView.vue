@@ -1,6 +1,7 @@
 
 <script setup>
 import AddTask from '@/components/AddTask.vue'
+import DeleteTask from '@/components/DeleteTask.vue'
 import TasksList from '@/components/TasksList.vue'
 import {ref} from 'vue'
 const tasks = ref([
@@ -14,14 +15,21 @@ const tasks = ref([
   }
 ])
 const addTask = (newTask) => {
-  tasks.value.push(newTask)
+  tasks.value.push({... newTask})
+}
+const valideTask = (idtask) => {
+    tasks.value[idtask] = !tasks.value[idtask]
+}
+const delTask = (idtask) => {
+    tasks.value.splice(idtask,1)
 }
 </script>
 
 <template>
   <main class="main">
+    <h1>Home</h1>
     <AddTask @plus-task="addTask"></AddTask>
-    <TasksList :tasks="tasks"></TasksList>
+    <TasksList :tasks="tasks" @valid-task="valideTask" @del-task="delTask"></TasksList>
   </main>
 </template>
 
